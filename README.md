@@ -1,2 +1,3 @@
-# moduletest-utils
-Utils for analyzing a particular group of IoT devices
+# `moduletest-tools`
+Tools designed for analysis of IoT devices probing for 802.11 AP with SSID `moduletest`.
+
