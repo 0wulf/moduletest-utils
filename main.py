@@ -22,6 +22,7 @@ def main():
     parser.add_argument('-r', '--recon', action='store_true', help='Recon the network for IPv4s')
     parser.add_argument('-v', '--verbose', action='store_true', help='Debug level logging')
     parser.add_argument('-s', '--signal-monitor', action='store_true', help='Monitor the signal of the devices')
+    parser.add_argument('-d', '--detect-cleartext', action='store_true', help='Detect cleartext communication - WIP')
     args = parser.parse_args()
 
     level =  logging.INFO

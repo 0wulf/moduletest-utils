@@ -17,5 +17,6 @@ def signal_mon(iface):
         devs.append([line.split(' ')[1]])
       elif 'signal' in line:
         devs[-1] = devs[-1] + [line[-7:]]
-    logger.info(devs)
+    for dev in devs:
+      logger.info(dev)
     sleep(NC.MONITOR_FREQ)
