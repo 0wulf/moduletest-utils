@@ -21,6 +21,7 @@ def main():
     parser.add_argument('-i', '--interface', type=str, help='Interface to use')
     parser.add_argument('-r', '--recon', action='store_true', help='Recon the network for IPv4s')
     parser.add_argument('-v', '--verbose', action='store_true', help='Debug level logging')
+    parser.add_argument('-s', '--signal-monitor', action='store_true', help='Monitor the signal of the devices')
     args = parser.parse_args()
 
     level =  logging.INFO
@@ -61,9 +62,8 @@ def main():
         for ipv4 in ipv4s:
             t = threading.Thread(target=connect_loop, args=(ipv4,))
             threads.append(t)
-
-        
-    threads.append(threading.Thread(target=signal_mon, args=(interface,)))
+    if args.signal_monitor == True:         
+        threads.append(threading.Thread(target=signal_mon, args=(interface,)))
     for t in threads:
         t.start()
 
