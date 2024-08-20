@@ -2,6 +2,8 @@ import subprocess
 import logging
 from time import sleep
 
+from src.config import NetworkConfig as NC
+
 logger = logging.getLogger(__name__)
 
 def signal_mon(iface):
@@ -16,4 +18,4 @@ def signal_mon(iface):
       elif 'signal' in line:
         devs[-1] = devs[-1] + [line[-7:]]
     logger.info(devs)
-    sleep(1)
+    sleep(NC.MONITOR_FREQ)

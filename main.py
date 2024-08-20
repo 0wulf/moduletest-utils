@@ -16,7 +16,7 @@ def main():
         prog='moduletest-utils',
         description='Tools for analysis of IoT devices probing for 802.11 AP with SSID "moduletest"'
     )
-    parser.add_argument('-a', '--access-point', type=str, help='Create or up the access point - WIP')
+    parser.add_argument('-a', '--access-point', type=str, help='nmcli interface for create, up, down, delete, or show the access point')
     parser.add_argument('-c', '--connect', action='store_true', help='Connect to the devices through port 6668 and send payload')
     parser.add_argument('-i', '--interface', type=str, help='Interface to use')
     parser.add_argument('-r', '--recon', action='store_true', help='Recon the network for IPv4s')
@@ -35,10 +35,19 @@ def main():
     logger.info(f'Using interface: {interface}')
 
     if args.access_point == 'create':
-        AP.create()
+        AP.create(interface)
         exit()
     elif args.access_point == 'up':
         AP.up()
+        exit()
+    elif args.access_point == 'down':
+        AP.down()
+        exit()
+    elif args.access_point == 'delete':
+        AP.delete()
+        exit()
+    elif args.access_point == 'show':
+        AP.show()
         exit()
 
     ipv4s = []

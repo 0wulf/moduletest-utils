@@ -28,6 +28,6 @@ def send_message(message, ipv4):
 def connect_loop(ipv4):
     logger.info(f'Starting connect_loop for {ipv4}')
     while True:
-        message = get_message(MC.PAYLOAD)
+        message = get_message(MC.DUMMY_PAYLOAD)
         send_message(message, ipv4)
-        sleep(1)
+        sleep(MC.FREQ)
