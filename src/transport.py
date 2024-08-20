@@ -2,7 +2,6 @@ import tinytuya
 import socket
 import logging
 
-from time import sleep
 
 from src.config import MessageConfig as MC
 
@@ -26,10 +25,7 @@ def send_message(message, ipv4):
     except Exception as e:
         logger.error(f'Failed to send message to {ipv4}: {e}')
 
-def connect_loop(ipv4):
-    logger.info(f'Starting connect_loop for {ipv4}')
-    while True:
-        message = get_message(MC.DUMMY_PAYLOAD)
-        send_message(message, ipv4)
-        sleep(MC.FREQ)
-
+def connect(ipv4):
+    logger.info(f'Starting connection for {ipv4}')
+    message = get_message(MC.DUMMY_PAYLOAD)
+    send_message(message, ipv4)

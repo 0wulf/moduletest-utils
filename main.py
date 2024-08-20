@@ -2,12 +2,15 @@ import argparse
 import threading
 import logging
 
+from time import sleep
+
 
 from src.network.signal import signal_mon
 from src.network.ap import AP
-from src.network.recon import recon
-from src.transport import connect_loop
+from src.network.scan import scan
+from src.transport import connect
 from src.config import NetworkConfig as NC
+from src.config import SLEEP_TIME
 
 logger = logging.getLogger(__name__)
 
@@ -19,9 +22,8 @@ def main():
     parser.add_argument('-a', '--access-point', type=str, help='nmcli interface for create, up, down, delete, or show the access point')
     parser.add_argument('-c', '--connect', action='store_true', help='Connect to the devices through port 6668 and send payload')
     parser.add_argument('-i', '--interface', type=str, help='Interface to use')
-    parser.add_argument('-r', '--recon', action='store_true', help='Recon the network for IPv4s')
     parser.add_argument('-v', '--verbose', action='store_true', help='Debug level logging')
-    parser.add_argument('-s', '--signal-monitor', action='store_true', help='Monitor the signal of the devices')
+    parser.add_argument('-m', '--monitor', action='store_true', help='Monitor the signal of the devices')
     parser.add_argument('-d', '--detect-cleartext', action='store_true', help='Detect cleartext communication - WIP')
     args = parser.parse_args()
 
@@ -52,23 +54,22 @@ def main():
         AP.show()
         exit()
 
-    ipv4s = []
-    if args.recon == True:
-        ipv4s = recon(interface)
-    else:
-        ipv4s = NC.IPv4s
+    # Loop for avoiding shared data and locks
+    while True:
+        ipv4s = scan(interface)
 
-    threads = []
-    if args.connect == True:
-        for ipv4 in ipv4s:
-            t = threading.Thread(target=connect_loop, args=(ipv4,))
-            threads.append(t)
-    if args.signal_monitor == True:         
-        threads.append(threading.Thread(target=signal_mon, args=(interface,)))
-    for t in threads:
-        t.start()
-
-
+        threads = []
+        if args.connect == True:
+            for ipv4 in ipv4s:
+                t = threading.Thread(target=connect, args=(ipv4,))
+                threads.append(t)
+        if args.monitor == True:         
+            threads.append(threading.Thread(target=signal_mon, args=(interface,)))
+        for t in threads:
+            t.start()
+        sleep(SLEEP_TIME)
+        for t in threads:
+            t.join()
 
 
 if __name__ == '__main__':
