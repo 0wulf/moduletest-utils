@@ -19,3 +19,6 @@ class AP:
     subprocess.call(['nmcli', 'con', 'delete', NC.SSID])
   def show():
     subprocess.call(['nmcli', 'con', 'show'])
+  def clear(iface):
+    # set down all posible connections up for the interface
+    pass

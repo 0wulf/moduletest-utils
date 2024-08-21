@@ -8,11 +8,13 @@ from src.config import MessageConfig as MC
 logger = logging.getLogger(__name__)
 
 def get_message(payload: bytes):
-    msg = tinytuya.TuyaMessage(0, 0x0b, 0, payload, 0, True, tinytuya.PREFIX_55AA_VALUE, False) # 0x09 0x0a 0x0b
+    msg = tinytuya.TuyaMessage(0, 0x0a, 0, payload, 0, True, tinytuya.PREFIX_55AA_VALUE, False) # commands 0x09 0x0a 0x0b generate responses
     msg = tinytuya.pack_message(msg,hmac_key=None)
     return msg
 
-def send_message(message, ipv4):
+def connect(ipv4):
+    logger.debug(f'Starting connection for {ipv4}')
+    message = get_message(MC.DUMMY_PAYLOAD)
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.settimeout( 4 )
@@ -24,8 +26,3 @@ def send_message(message, ipv4):
         logger.debug(f'Received message from {ipv4}: {msg}')
     except Exception as e:
         logger.debug(f'Failed to send message to {ipv4}: {e}')
-
-def connect(ipv4):
-    logger.debug(f'Starting connection for {ipv4}')
-    message = get_message(MC.DUMMY_PAYLOAD)
-    send_message(message, ipv4)

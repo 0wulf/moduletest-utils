@@ -20,7 +20,7 @@ def main():
         description='Tools for analysis of IoT devices probing for 802.11 AP with SSID "moduletest"'
     )
     parser.add_argument('-a', '--access-point', type=str, help='nmcli interface for create, up, down, delete, or show the access point')
-    parser.add_argument('-c', '--connect', action='store_true', help='Connect to the devices through port 6668/tcp and send payload')
+    parser.add_argument('-c', '--connect', action='store_true', help='Connect to the devices through port 6668/tcp and send dummy payload')
     parser.add_argument('-i', '--interface', type=str, help='Interface to use')
     parser.add_argument('-v', '--verbose', action='store_true', help='Debug level logging')
     parser.add_argument('-m', '--monitor', action='store_true', help='Monitor the signal of the devices')
