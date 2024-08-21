@@ -23,9 +23,9 @@ def send_message(message, ipv4):
         msg = tinytuya.unpack_message(rcv, hmac_key=None)
         logger.debug(f'Received message from {ipv4}: {msg}')
     except Exception as e:
-        logger.error(f'Failed to send message to {ipv4}: {e}')
+        logger.debug(f'Failed to send message to {ipv4}: {e}')
 
 def connect(ipv4):
-    logger.info(f'Starting connection for {ipv4}')
+    logger.debug(f'Starting connection for {ipv4}')
     message = get_message(MC.DUMMY_PAYLOAD)
     send_message(message, ipv4)

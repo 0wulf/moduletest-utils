@@ -24,7 +24,7 @@ $ python3 main.py -a up
 
 Run the tool for recon devices, connect to the devices, force communication and monitor the signal strength:
 ```bash
-$ python3 main.py -csr [-i <interface>]
+$ python3 main.py -cs [-i <interface>]
 ```
 
 
