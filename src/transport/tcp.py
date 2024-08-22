@@ -1,5 +1,4 @@
 import tinytuya
-import socket
 import logging
 import asyncio
 

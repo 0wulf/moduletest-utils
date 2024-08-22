@@ -21,10 +21,12 @@ class Monitor:
 
     return devs
 
+  '''
+  Scan via arp-scan for dynamic IP addresses. Noisy
+  '''
   def scan(self):
     ipv4s, macs = [], []
     lines = subprocess.check_output(['arp-scan', '-I', self.iface, '-l']).decode('utf-8').split('\n')[2:-4]
-    logger.debug(lines)
     for line in lines:
       ipv4, mac = line.split('\t')[0], line.split('\t')[1]
       ipv4s.append(ipv4)
