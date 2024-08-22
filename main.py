@@ -41,19 +41,21 @@ async def main():
     gps_client = GPSClient()
     
     while True:
-        min_time = asyncio.sleep(SLEEP_TIME)
-
-        if args.gps:
-            gps_client.get_coords()
-        mon.get_signal()
+        wg = [asyncio.sleep(SLEEP_TIME)]
 
         if args.connect:
             ipv4s = mon.scan()
             conman.update_ipv4s(ipv4s)
-            await conman.connect()
+            wg.append(conman.connect())
 
-        await min_time
-        
+        signal = mon.get_signal()
+        coords = []
+        if args.gps:
+            coords = gps_client.get_coords()
+        logger.info(f'Signal: {signal} dBm, Coords: {coords}')
+
+        await asyncio.gather(*wg)
+
 
 if __name__ == '__main__':
     asyncio.run(main())

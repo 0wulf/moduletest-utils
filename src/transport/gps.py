@@ -1,6 +1,6 @@
 import socket
 import logging
-import time
+import asyncio
 
 from pynmeagps.nmeareader import NMEAReader
 
@@ -14,6 +14,7 @@ class GPSClient:
     self.port = GC.PORT
 
   def get_coords(self): # refactor
+    coords = []
     try:
       logger.info(f'Connecting to GPS server at {self.ipv4}:{self.port}...')
       with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as stream:
@@ -21,6 +22,10 @@ class GPSClient:
         nmr = NMEAReader(stream, nmeaonly=True) 
         for _, parsed_data in nmr:
           if parsed_data.msgID == 'RMC':
-            logger.info([parsed_data.lat, parsed_data.lon])
+            coords = [parsed_data.lat, parsed_data.lon]
+            return coords
     except ConnectionRefusedError as e:
-      logger.error(f'Connection refused: {e}')
+      logger.error('Connection refused. Remember to start the GPS server.')
+
+  async def get_coords_async(self):
+    coords = []
