@@ -12,12 +12,16 @@ class AP:
     subprocess.call(['nmcli', 'con', 'modify', NC.SSID, 'wifi-sec.key-mgmt','wpa-psk'])
     subprocess.call(['nmcli', 'con', 'modify', NC.SSID, 'wifi-sec.psk',f'"{NC.PSK}"'])
     subprocess.call(['nmcli', 'con', 'modify', NC.SSID, 'connection.autoconnect', 'no'])
+
   def up():
     subprocess.call(['nmcli', 'con', 'up', NC.SSID])
+
   def down():
     subprocess.call(['nmcli', 'con', 'down', NC.SSID])
+
   def delete():
     subprocess.call(['nmcli', 'con', 'delete', NC.SSID])
+
   def clear(iface):
     bin = subprocess.check_output(['nmcli', 'con', 'show'])
     string = bin.decode('utf-8')
@@ -28,5 +32,3 @@ class AP:
         cons.append(line.split(' ')[0])
     for con in cons:
       subprocess.call(['nmcli', 'con', 'down', con])
-
-    

@@ -6,7 +6,14 @@ Devices probing for the SSID `moduletest` are likely to be IoT devices running a
 Sniffing the devices in layer 2 is tricky as the devices send probes on different channels.
 The tools help create an AP with SSID `moduletest`, set up the AP, scan the network actively through arp scan, obtaining a constant stream of packets from which calculate and monitor the signal strength, and connecting to the devices on port 6668/tcp for detecting versions in the wild.
 
-## Utils
+## Setup and Usage
+Install the requirements either on the user's environment or in a virtual environment
+```bash
+$ pip3 install -r requirements
+# OR RUN THIS ON THE DIRECTORY ROOT
+$ python3 -m venv .
+```
+
 Clear (put down) active connections on your interface
 ```bash
 $ python3 main.py -a clear [-i <interface>]
@@ -24,7 +31,6 @@ $ python3 main.py -cmv [-i <interface>]
 
 
 ## To-Do List
-- [ ] Connection to GPS server
 - [ ] SQLite / InfluxDB for storing known devices, measurements and coordinates, responses to commands on port 6668.
 - [ ] Web server for monitoring from outside the command line.
 - [ ] Mapping utils

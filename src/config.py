@@ -8,3 +8,7 @@ class NetworkConfig:
   CHANNEL = 11
   SSID = 'moduletest'
   PSK = 'test1234'
+
+class GPSConfig:
+  HOST = '172.20.10.1'
+  PORT = 11000
