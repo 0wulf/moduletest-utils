@@ -16,16 +16,21 @@ $ pip3 install -r requirements
 # OR RUN THIS ON THE DIRECTORY ROOT
 $ python3 -m venv .
 ```
-
-Run the tool for setting up the WiFi AP/Hotspot, monitor the devices signal strength, ARP scan for device's IPs, connect to the devices in port 6668/tcp and send dummy payload for version detection and get verbose logs.
+### `mtsniff`
+Run `mtsniff` for setting up the WiFi AP/Hotspot, monitor the devices signal strength, ARP scan for device's IPs, connect to the devices in port 6668/tcp and send dummy payload for version detection and get verbose logs.
 ```bash
-$ sudo python3 main.py -cv [-i <interface>]
+$ sudo python3 main.py mtsniff -cv [-i <interface>]
 ```
+
+### `mtxtract`
+...
+
+### `mtmap`
+...
 
 Disclaimer: The tool manages the network via NetworkManager, the default way to manage wireless networks on Debian-like distributions, such as Debian, Ubuntu and Kali.
 
 ## To-Do List
 - [ ] Web server for monitoring from outside the command line.
-- [ ] SQLite / InfluxDB for storing known devices, measurements and coordinates, responses to commands on port 6668.
 - [ ] Mapping utils
 - [ ] ...
