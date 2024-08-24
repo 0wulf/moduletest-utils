@@ -4,7 +4,7 @@ import asyncio
 
 from pynmeagps.nmeareader import NMEAReader
 
-from src.config import GPSConfig as GC
+from src.mtsniff.config import GPSConfig as GC
 
 logger = logging.getLogger(__name__)
 
@@ -16,7 +16,7 @@ class GPSClient:
   def get_coords(self): # refactor
     coords = []
     try:
-      logger.info(f'Connecting to GPS server at {self.ipv4}:{self.port}...')
+      logger.debug(f'Connecting to GPS server at {self.ipv4}:{self.port}...')
       with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as stream:
         stream.connect((self.ipv4, self.port))
         nmr = NMEAReader(stream, nmeaonly=True) 

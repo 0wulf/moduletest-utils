@@ -14,7 +14,7 @@ class Monitor:
     for line in lines:
       if 'Station' in line:
         devs.append([line.split(' ')[1]])
-      elif 'signal' in line:
+      elif 'signal' in line and '-' in line:
         devs[-1] = devs[-1] + [line[-7:]]
     for dev in devs:
       logger.info(dev)

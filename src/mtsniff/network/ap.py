@@ -1,6 +1,6 @@
 import subprocess
 
-from src.config import NetworkConfig as NC
+from src.mtsniff.config import NetworkConfig as NC
 
 class AP:
   def __init__(self, interface=NC.INTERFACE):

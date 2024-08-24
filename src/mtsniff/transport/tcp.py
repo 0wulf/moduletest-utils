@@ -2,7 +2,7 @@ import tinytuya
 import logging
 import asyncio
 
-from src.config import MessageConfig as MC
+from src.mtsniff.config import MessageConfig as MC
 
 logger = logging.getLogger(__name__)
 
