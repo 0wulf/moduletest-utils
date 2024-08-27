@@ -21,6 +21,10 @@ Run `mtsniff` for setting up the WiFi AP/Hotspot, monitor the devices signal str
 ```bash
 $ sudo python3 main.py mtsniff -cv [-i <interface>]
 ```
+Run `mtsniff` web server for monitoring from outside the command line.
+```bash
+$ sudo python3 main.py mtsniff -w
+```
 
 ### `mtxtract`
 ...
