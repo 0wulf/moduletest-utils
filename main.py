@@ -17,6 +17,7 @@ def mtsniff_args(subparsers):
     subparser.add_argument('-i', '--interface', type=str, help='Interface to use')
     subparser.add_argument('-v', '--verbose', action='store_true', help='Debug level logging')
     subparser.add_argument('-o', '--output', type=str, help='Append to csv file. -g must be set')
+    subparser.add_argument('-w', '--web', action='store_true', help='Only run web server')
 
 async def main():
     parser = argparse.ArgumentParser(

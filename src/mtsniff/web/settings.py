@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-&gzmk+%038sb7n#ppcsq3q9y1zh=75qyf2drlh^(o0zg13cr4y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost'] + [f'172.20.10.{i}' for i in range(1, 255)]
 
 
 # Application definition
@@ -50,7 +50,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "mtsniffweb.urls"
+ROOT_URLCONF = "web.urls"
 
 TEMPLATES = [
     {
@@ -68,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "mtsniffweb.wsgi.application"
+WSGI_APPLICATION = "web.wsgi.application"
 
 
 # Database

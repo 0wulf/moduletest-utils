@@ -2,6 +2,7 @@
 import logging
 import asyncio
 import datetime
+import subprocess
 
 
 from src.mtsniff.network.monitor import Monitor
@@ -15,6 +16,11 @@ logger = logging.getLogger(__name__)
 
 
 async def main(args):
+    if args.web:
+        logger.info('Starting web server')
+        subprocess.run(['python3', 'src/mtsniff/manage.py', 'runserver', '0.0.0.0:8000'])
+        return
+    
     if args.verbose:
         logging.basicConfig(level=logging.DEBUG)
     else:
